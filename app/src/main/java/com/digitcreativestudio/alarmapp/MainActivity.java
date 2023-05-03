@@ -4,9 +4,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -19,10 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-//import com.android.volley.*;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -32,13 +29,8 @@ import okhttp3.Request;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static String URL = "http://ashim.pythonanywhere.com/alarmapp";
-    private final static String URL_ADD = "http://ashim.pythonanywhere.com/alarmapp_add";
-    private final static String URL_DELETE = "http://ashim.pythonanywhere.com/alarmapp_delete";
 
-    TimePicker myTimePicker;
-    Button buttonstartSetDialog, btnSave, btnLoad;
-//    TextView textAlarmPrompt;
+    Button buttonstartSetDialog;
 
     TimePickerDialog timePickerDialog;
 
@@ -54,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        textAlarmPrompt = (TextView) findViewById(R.id.alarmprompt);
-        btnLoad = findViewById(R.id.btn_load);
-        btnSave = findViewById(R.id.btn_save);
 
         dataSet = new ArrayList<>();
         rv_alarm = findViewById(R.id.rv_alarm);
@@ -82,50 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Context context = this;
 
-//        btnLoad.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setTitle("Download Data");
-//                builder.setMessage("Download data akan menghapus data alarm ponsel ini, dan diganti oleh data alarm dari server.");
-//                builder.setCancelable(false);
-//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        loadFromServer();
-//                    }
-//                });
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//
-//                    }
-//                });
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//            }
-//        });
-//
-//        btnSave.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setTitle("Upload Data");
-////                Upload data akan me-replace data alarm server sesuai data alarm ponsel ini.
-//                builder.setMessage("Upload data akan menghapus data alarm server, dan diganti oleh data alarm dari ponsel ini.");
-//                builder.setCancelable(false);
-//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        deleteSaveFromToServer();
-//                    }
-//                });
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//
-//                    }
-//                });
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//            }
-//        });
+
     }
 
     private void deleteAllAlarm(){
@@ -141,146 +87,6 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
     }
 
-//    private void deleteSaveFromToServer(){
-//        StringRequest srblogList = new StringRequest(Request.Method.POST, URL_DELETE,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.e("?", response);
-//                        if(response.equals("TRUE")){
-//                            saveToServer();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                });
-//
-//        //request handler volley
-//        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(srblogList);
-//    }
-
-//    private void saveToServer(){
-//        StringRequest srblogList = new StringRequest(Request.Method.POST, URL_ADD,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.e("?", response);
-//                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                }){
-//                    @Override
-//                    public Map<String, String> getHeaders() {
-//                        Map<String, String> params = new HashMap<>();
-//                        return params;
-//                    }
-//                    @Override
-//                    protected Map<String, String> getParams() {
-//                        Map<String, String> params = new HashMap<>();
-////                        how to datetime to string
-////                        json = make list array of datetime + key
-////                        params.put("json", json);
-//
-//                        List<Map<String, String>> list_map_alarm = new ArrayList<Map<String, String>>();
-//                        for(Model alarm : dataSet){
-//                            Map<String, String> map = new HashMap<>();
-//                            map.put("id", ""+alarm.getKey());
-//                            map.put("content", alarm.getValue());
-//                            list_map_alarm.add(map);
-//                        }
-//                        List<JSONObject> alarm_json = new ArrayList<JSONObject>();
-//                        for(Map<String, String> data : list_map_alarm) {
-//                            JSONObject obj = new JSONObject(data);
-//                            alarm_json.add(obj);
-//                        }
-//                        JSONArray alarm_array = new JSONArray(alarm_json);
-//                        Log.e("json", alarm_array.toString());
-//                        params.put("json", alarm_array.toString());
-//
-//                        return params;
-//                    }
-////                    public void onErrorResponse(VolleyError error) {
-////                        // As of f605da3 the following should work
-////                        NetworkResponse response = error.networkResponse;
-////                        if (error instanceof ServerError && response != null) {
-////                            try {
-////                                String res = new String(response.data,
-////                                        HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-////                                // Now you can use any deserializer to make sense of data
-////                                JSONObject obj = new JSONObject(res);
-////                            } catch (UnsupportedEncodingException e1) {
-////                                // Couldn't properly decode data to string
-////                                e1.printStackTrace();
-////                            } catch (JSONException e2) {
-////                                // returned data is not JSONObject?
-////                                e2.printStackTrace();
-////                            }
-////                        }
-////                    }
-//                };
-//
-//        //request handler volley
-//        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(srblogList);
-//    }
-//
-//    private void loadFromServer(){
-//        StringRequest srblogList = new StringRequest(Request.Method.GET, URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        final ArrayList<Model> dataSementara = new ArrayList<Model>();
-//                        try {
-////                            JSONObject jsonObject = new JSONObject(response);
-//
-//                            JSONArray jsonArray = new JSONArray(response);
-//                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                JSONArray js = (JSONArray) jsonArray.get(i);
-//                                Model obj = new Model((int)js.get(0), (String) js.get(1));
-//                                Log.e("XXX", obj.getValue());
-//                                dataSementara.add(obj);
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                        //hapus alarm manager semua (alarm)
-//                        deleteAllAlarm();
-//
-//                        //replace alarm dari server ke lokal (alarm)
-////                        dataSementara -> alarm lokal;
-//                        saveAllAlarm(dataSementara);
-//
-//                        //hapus dan replace alarm dari server ke lokal (list)
-//                        dataSet.clear();
-//
-////                        for data set datasementara -> list lokal
-//                        for (int i=0; i<dataSementara.size(); i++){
-//                            dataSet.add(dataSementara.get(i));
-//                        }
-//
-//                        adapter.notifyDataSetChanged();
-//                        Toast.makeText(getApplicationContext(), "Download Data Sukses", Toast.LENGTH_LONG).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                });
-//
-//        //request handler volley
-//        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(srblogList);
-//    }
 
     private void saveAllAlarm(ArrayList<Model> listDataSementara){
         for(int i=0; i<listDataSementara.size(); i++){
@@ -319,15 +125,13 @@ public class MainActivity extends AppCompatActivity {
             calSet.set(Calendar.SECOND, 0);
             calSet.set(Calendar.MILLISECOND, 0);
 
-            //pengecekan jika waktu sekarang ....
             if (calSet.compareTo(calNow) <= 0) {
-                // Today Set time passed, count to tomorrow
                 calSet.add(Calendar.DATE, 1);
-                Log.i("hasil", " =<0");
+                Log.i("some_teg", " =<0");
             } else if (calSet.compareTo(calNow) > 0) {
-                Log.i("hasil", " > 0");
+                Log.i("some_teg", " > 0");
             } else {
-                Log.i("hasil", " else ");
+                Log.i("some_teg", " else ");
             }
 
             setAlarm(calSet);
@@ -336,12 +140,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm(Calendar targetCal) {
 
-//        String info = "***\n" + "Alarm set on " + targetCal.getTime() + "\n***";
-//        textAlarmPrompt.setText(info);
 
         int key = (int)(Math.random() * 1000 + 1);
 
-        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+        Intent intent = new Intent(getBaseContext(), Alarm_Receiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 getBaseContext(), RQS_1, intent, key);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -354,10 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm(int key, Calendar targetCal) {
 
-//        String info = "***\n" + "Alarm set on " + targetCal.getTime() + "\n***";
-//        textAlarmPrompt.setText(info);
-
-        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+        Intent intent = new Intent(getBaseContext(), Alarm_Receiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 getBaseContext(), RQS_1, intent, key);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
