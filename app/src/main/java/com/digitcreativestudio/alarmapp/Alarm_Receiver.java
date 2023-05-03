@@ -33,14 +33,14 @@ public class Alarm_Receiver extends AppCompatActivity {
 
     public void onClick(View view) {
         onDestroy();
+        finishActivity(1);
     }
 
     protected void onDestroy() {
 
+        super.onDestroy();
         if (ringtone != null && ringtone.isPlaying()) {
             ringtone.stop();
         }
-        super.onDestroy();
-
     }
 }

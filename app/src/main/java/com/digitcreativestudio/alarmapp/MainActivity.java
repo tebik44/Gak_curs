@@ -144,12 +144,12 @@ public class MainActivity extends AppCompatActivity {
         int key = (int)(Math.random() * 1000 + 1);
 
         Intent intent = new Intent(getBaseContext(), Alarm_Receiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
                 getBaseContext(), RQS_1, intent, key);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
                 pendingIntent);
-
         dataSet.add(new Model(key, targetCal.getTime().toString()));
         adapter.notifyDataSetChanged();
     }
