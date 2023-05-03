@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33
+    defaultConfig {
+        applicationId "com.digitcreativestudio.alarmapp"
+        minSdkVersion 16
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    implementation 'androidx.appcompat:appcompat:7.2.0'
+//    implementation 'com.google.android.material:material:1.8.0'
+//    implementation 'androidx.appcompat:appcompat:1.6.1'
+//    //noinspection GradleCompatible
+////    implementation 'com.android.support:recyclerview-v7:28.0.0'
+//
+//    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Work Manager
+    implementation 'android.arch.work:work-runtime:1.0.1'
+
+    //Retrofit Dependencies
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.android.volley:volley:1.2.1'
+
+}

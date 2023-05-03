@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:gravity="center"
+              android:orientation="vertical" >
+
+    <AnalogClock
+        android:id="@+id/analogClock1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
+
+    <Button
+            android:id="@+id/startSetDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:drawableLeft="@android:drawable/ic_lock_idle_alarm"
+            android:text=" Set Alarm" />
+
+    <View android:id="@+id/separator"
+          android:background="#000000"
+          android:layout_width = "fill_parent"
+          android:layout_height="1dip"/>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:orientation="horizontal">
+        <Button
+                android:id="@+id/btn_load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_cloud_download_black_24dp"
+                android:text=" Download Data" />
+        <Button
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_cloud_upload_black_24dp"
+                android:text=" Upload Data" />
+    </LinearLayout>
+
+<!--    <TextView-->
+<!--            android:id="@+id/alarmprompt"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="20dp"
+            android:id="@+id/rv_alarm"
+            android:layout_width="match_parent" android:layout_height="match_parent"/>
+
+</LinearLayout>
