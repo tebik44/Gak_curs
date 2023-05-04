@@ -27,7 +27,6 @@ public class Alarm_Receiver extends AppCompatActivity {
         }
         if (ringtone != null) {
             ringtone.play();
-
         }
     }
 

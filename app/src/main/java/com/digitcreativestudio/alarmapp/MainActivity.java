@@ -12,25 +12,19 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.LayoutDirection;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import okhttp3.Request;
-
 public class MainActivity extends AppCompatActivity {
 
-
-    Button buttonstartSetDialog;
+    Button buttonstartSetDialog, buttonstopSetDialog;
 
     TimePickerDialog timePickerDialog;
 
@@ -68,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         final Context context = this;
 
@@ -107,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         timePickerDialog = new TimePickerDialog(MainActivity.this,
                 onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE), true);
-        timePickerDialog.setTitle("Set Alarm Time");
+        timePickerDialog.setTitle("Задать будильник");
 
         timePickerDialog.show();
     }
@@ -127,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (calSet.compareTo(calNow) <= 0) {
                 calSet.add(Calendar.DATE, 1);
-                Log.i("some_teg", " =<0");
+                Log.i("some_teg", " =< 0");
             } else if (calSet.compareTo(calNow) > 0) {
                 Log.i("some_teg", " > 0");
             } else {
@@ -143,11 +139,12 @@ public class MainActivity extends AppCompatActivity {
 
         int key = (int)(Math.random() * 1000 + 1);
 
-        Intent intent = new Intent(getBaseContext(), Alarm_Receiver.class);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                getBaseContext(), RQS_1, intent, key);
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                getBaseContext(), RQS_1, intent, key);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
                 pendingIntent);
         dataSet.add(new Model(key, targetCal.getTime().toString()));
@@ -156,14 +153,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm(int key, Calendar targetCal) {
 
-        Intent intent = new Intent(getBaseContext(), Alarm_Receiver.class);
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Dialog dialog = new Dialog();
+        dialog.show(getSupportFragmentManager(), "some_teg");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 getBaseContext(), RQS_1, intent, key);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
                 pendingIntent);
-
+//        Dialog dialog = new Dialog();
+//        dialog.show(getSupportFragmentManager(), "some_teg");
         dataSet.add(new Model(key, targetCal.getTime().toString()));
         adapter.notifyDataSetChanged();
     }
+
 }

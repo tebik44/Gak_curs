@@ -70,10 +70,11 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder>{
     }
 
     private void cancelAlarm(int key){
-        Intent intent = new Intent(context, Alarm_Receiver.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context, RQS_1, intent, key);
         alarmManager.cancel(pendingIntent);
+
     }
 
 }

@@ -20,13 +20,14 @@
         android:layout_marginBottom="20dp"
         android:drawableRight="@android:drawable/ic_lock_idle_alarm"
         android:drawableLeft="@android:drawable/ic_lock_idle_alarm"
-        android:text="Set Alarm"
+        android:text="Новый будильник"
         android:elevation="6dp"
         android:stateListAnimator="@null"
         android:translationZ="4dp"
         android:background="@color/colorWhite"
         android:textColor="@color/colorOrange"
         />
+
 
     <View android:id="@+id/separator"
           android:background="#000000"
@@ -36,6 +37,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="20dp"
             android:id="@+id/rv_alarm"
-            android:layout_width="match_parent" android:layout_height="match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 </LinearLayout>
